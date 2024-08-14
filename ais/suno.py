@@ -23,7 +23,7 @@ class SunoAI(abc_model.AIModel):
                 error_callback()
                 print(f"error while threadedGenerate: {resp1}")
             return False
-        time.sleep(5)
+        time.sleep(15)
         resp = req.get(self.baseurl+f"api/get?ids={resp1[0]['id']}").json()
         if not callback is None:
             callback(resp[0])

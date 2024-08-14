@@ -11,15 +11,19 @@
 
 ### Для первоначальной настройки
 
-В любой пустой директории
+**В любой пустой директории**
 ```bash
-git clone https://github.com/gcui-art/suno-api.git
-cd suno-api
+git clone https://github.com/huhrya/suno-api-multy-account.git
+cd suno-api-multy-account
 npm i
 ```
 
 Перейдите на [https://suno.com/create](https://suno.com/create) и авторизуйтесь. Получите Cookie по инструкции:
 ![cookie get](https://github.com/gcui-art/suno-api/raw/main/public/get-cookie-demo.gif)
+
+Можете повторить несколько раз с разных аккаунтов, для увеличения лимита (по умолчанию для 1 аккаунта это 10 песен)
+
+---
 
 Скопируйте файл .env.example в .env
 
@@ -40,23 +44,26 @@ Copy-Item .env.example .env
 
 Отредактируйте полученный файл .env:
 ```bash
-SUNO_COOKIE=<Полученный Cookie>
+SUNO_COOKIES='["<Полученный Cookie>", "<Полученный Cookie 2>", ... "<Полученный Cookie X>"]'
 ```
+Cookie может быть сколько угодно, можно один, можно десяток. Главное хотя бы один, но тогда будет ограничение (1 Cookie = 10 песен)
 
 ---
+
+Затем надо ввести в консоли, там же где и прописывали `npm i`:
 
 ```bash
 npm run build
 ```
 
-В этой директории
+**В этой директории**
 ```bash
 pip install -r req.txt
 ```
 
 ### Для запуска
 
-В директории suno-api
+В директории suno-api-multy-account
 ```bash
 npx next start -p 45540
 ```
