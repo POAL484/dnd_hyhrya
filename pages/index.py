@@ -8,7 +8,7 @@ def index_page(page: ft.Page):
             page.open(ft.AlertDialog(content=ft.Container(ft.Text("He выбранно количество игроков!", size=u.calcFontByWidth(page.width/1.5, "Не выбрано количество игроков!"), text_align=ft.TextAlign.CENTER), width=page.width/1.4, height=70, alignment=ft.Alignment(0, 0)), modal=False))
             return
         page.players = int(dd.value)
-        page.go("/start_game")
+        page.go("/setup_chars")
 
     dd = ft.Dropdown("ns", options=[
             ft.dropdown.Option("2", "2 Игрока"),

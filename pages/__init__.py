@@ -7,6 +7,7 @@ from .p404 import *
 from .start_game import *
 from .tokens_expired_error import *
 from .unkown_error import *
+from.setup_chars import *
 
 ROUTES = {
     "/": index_page,
@@ -15,7 +16,8 @@ ROUTES = {
     "/404": p404_page,
     "/start_game": start_game_page,
     "/tokens_expired_error": tokens_expired_error_page,
-    "/unknown_error": unknown_error_page
+    "/unknown_error": unknown_error_page,
+    "/setup_chars": setup_chars_page
 }
 
 def router(route: str, page: Page):
