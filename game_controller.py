@@ -11,6 +11,7 @@ class Game:
         
     def start(self, callback: callable, error_callback: callable):
         self.img = "https://kappa.lol/cio8N"
+        #@POAL48, имя хп опыт инвентарь|спеллы/способности
         self.info_players = []
         for i in range(self.page.players):
             self.info_players.append({"name": f"Имя {i+1}", "info": f"Еще что нибудь {i+1}"})
