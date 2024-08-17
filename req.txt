@@ -2,3 +2,6 @@ requests
 flet
 pillow
 openai==0.28
+translate
+g4f
+curl_cffi

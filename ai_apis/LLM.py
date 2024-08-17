@@ -10,13 +10,13 @@ class LLMAI:
     def __init__(self):
         self.AIClient = ais.gpt.GptAI()
 
-    def generate_plot_with_ai(self, callback, async_callback, asyncio_loop, error_callback):
+    def generate_plot_with_ai(self, callback = None, async_callback = None, asyncio_loop = None, error_callback = None):
         prompt = (
             "Создай сюжет для квеста в стиле Dungeons & Dragons 5e. "
             "Квест должен быть рассчитан на одну игровую сессию(4 часа) и первоуровневых персонажей"
         )
         
-        self.AIClient.generate(messages=[
+        self.AIClient.generate([
                 {"role": "system", "content": "You are a creative storyteller."},
                 {"role": "user", "content": prompt}
             ], callback=callback, asyncio_loop=asyncio_loop, async_callback=async_callback, error_callback=error_callback)
@@ -31,7 +31,7 @@ class LLMAI:
             await fn(eval(msg))
         return wrapper_extract_json_async
     
-    def generate_character_with_ai(self, plot, callback, async_callback, asyncio_loop, error_callback):
+    def generate_character_with_ai(self, plot, callback = None, async_callback = None, asyncio_loop = None, error_callback = None):
         prompt = (
             f"Создай персонажа для Dungeons & Dragons 5e, основываясь на следующем сюжете:\n\n{plot}\n\n"
             "Опиши персонажа в формате JSON со следующими ключами:\n"

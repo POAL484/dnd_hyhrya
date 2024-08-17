@@ -48,7 +48,7 @@ class Game:
             "class": class_name,
             "attributes": base_stats,
             "speed": race['speed'],
-            "languages": race['langueges'],
+            "languages": race['languages'],
             "features": race['features'],
             "armor_proficiencies": race['armor_proficiencies'] + chr_class['armor_proficiencies'],
             "weapon_proficiencies": race['weapon_proficiencies'] + chr_class['weapon_proficiencies'],
@@ -60,7 +60,7 @@ class Game:
             "personal_goal": pers_goal if pers_goal else "Нет личной цели"
         })
 
-    def createCharAI(self):
+    def createCharAi(self):
         self.chars.append("ai")
         
     def start(self, callback: callable, error_callback: callable):

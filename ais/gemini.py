@@ -1,14 +1,15 @@
-### LLM MODEL
-import openai
+###TEXT TO IMAGE MODEL
+from g4f.client import Client
 
 import json
-openai.api_key = json.load(open("cfg.json"))['openai']
 
 from components import abc_model
 
-class GptAI(abc_model.AIModel):
-    def __init__(self, model: str = "gpt-4-turbo"):
+class GeminiAI(abc_model.AIModel):
+    def __init__(self, model: str = "bing"):
         self.model = model
+        self.client = Client()
+        self.cookie = json.load(open("cfg.json"))['cookie_gemini']
 
     def generate(self, payload: dict | list, callback: None = None, async_callback: None = None, asyncio_loop: None = None, error_callback: None = None) -> bool:
         async_call = super().generate(payload, callback, async_callback, asyncio_loop, error_callback)
@@ -16,12 +17,14 @@ class GptAI(abc_model.AIModel):
         return True
 
     def threadedGenerate(self, payload: dict | list, callback: None = None, async_callback: None = None, asyncio_loop: None = None, error_callback: None = None, async_call: bool = False) -> bool:
-        resp = openai.ChatCompletion.create(
+        resp = self.client.images.generate(
             model=self.model,
-            messages=payload
+            prompt=payload['prompt'],
+        
+            #cookies={"__Secure-1PSID": self.cookie}
         )
         if not callback is None:
-            callback(resp.choices[0].message['content'])
+            callback(resp.data[0].url)
         if async_call:
-            abc_model.asyncio.ensure_future(async_callback(resp.choices[0].message['content']), loop=asyncio_loop)
+            abc_model.asyncio.ensure_future(async_callback, loop=asyncio_loop)
         return True
