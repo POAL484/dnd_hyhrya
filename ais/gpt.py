@@ -16,12 +16,16 @@ class GptAI(abc_model.AIModel):
         return True
 
     def threadedGenerate(self, payload: dict | list, callback: None = None, async_callback: None = None, asyncio_loop: None = None, error_callback: None = None, async_call: bool = False) -> bool:
-        resp = openai.ChatCompletion.create(
-            model=self.model,
-            messages=payload
-        )
-        if not callback is None:
-            callback(resp.choices[0].message['content'])
-        if async_call:
-            abc_model.asyncio.ensure_future(async_callback(resp.choices[0].message['content']), loop=asyncio_loop)
-        return True
+        try:
+            resp = openai.ChatCompletion.create(
+                model=self.model,
+                messages=payload
+            )
+            if not callback is None:
+                callback(resp.choices[0].message['content'])
+            if async_call:
+                abc_model.asyncio.ensure_future(async_callback(resp.choices[0].message['content']), loop=asyncio_loop)
+            return True
+        except Exception as e:
+            if not error_callback is None: error_callback(e)
+            print(e)

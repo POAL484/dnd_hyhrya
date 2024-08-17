@@ -2,6 +2,9 @@ import PIL.ImageFont as fonts
 
 from flet import Page, dropdown
 
+import requests as req
+import base64
+
 defFont = fonts.truetype("Roboto-Regular.ttf", 100)
 
 def get_by_keys(dictonary: dict, keys: list) -> any:
@@ -9,7 +12,7 @@ def get_by_keys(dictonary: dict, keys: list) -> any:
     else: return dictonary[keys[0]] 
 
 def calcFontByWidth(target_width: float, text: str, font: fonts.FreeTypeFont = defFont) -> float:
-    prop_width = font.getlength(text)
+    prop_width = font.getlength(str(text))
     prop_height = font.size
     return (target_width*prop_height)/prop_width
 
@@ -38,3 +41,17 @@ def rightDictGen(keys: list, values: list) -> dict:
     for i in range(len(keys)):
         a[keys[i]] = values[i]
     return a
+
+def min_value_max(min_: int, value: int, max_: int):
+    if min_ > value: return min_
+    return min(value, max_)
+
+def image_show(src: str):
+    with open("content/temp.png", 'wb') as fp:
+        fp.write(req.get(src).content)
+    return "temp.png"
+
+def music_show(src: str):
+    with open("content/temp.mp3", 'wb') as fp:
+        fp.write(req.get(src).content)
+    return "temp.mp3"

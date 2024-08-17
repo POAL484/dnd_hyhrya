@@ -1,12 +1,12 @@
-###TEXT TO IMAGE MODEL: GEMINI
+###TEXT TO IMAGE MODEL: DALLE
 
-import ais.gemini
+import ais.dalle
 
 from translate import Translator
 
 class ImagesAI:
     def __init__(self):
-        self.AIClient = ais.gemini.GeminiAI()
+        self.AIClient = ais.dalle.GeminiAI()
         self.translator = Translator(from_lang="ru", to_lang="en")
 
     def generateImage(self, prompt_ru: str | None = None, prompt_en: str | None = None, callback = None, async_callback = None, asyncio_loop = None, error_callback = None):

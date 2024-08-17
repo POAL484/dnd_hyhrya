@@ -11,4 +11,4 @@ def main(page: ft.Page):
 
     on_route_change(None)
 
-ft.app(main, host="localhost", port=80, view=ft.AppView.WEB_BROWSER)
+ft.app(main, host="192.168.0.137", port=80, view=ft.AppView.WEB_BROWSER, assets_dir="content")

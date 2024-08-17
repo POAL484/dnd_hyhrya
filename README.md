@@ -60,6 +60,28 @@ npm run build
 ```bash
 pip install -r req.txt
 ```
+---
+Скопируйте файл cfg.example.json в cfg.json
+
+UNIX:
+```bash
+cp cfg.example.json cfg.json
+```
+
+Win cmd:
+```bash
+copy cfg.example.json cfg.json
+```
+
+Win PowerShell:
+```bash
+Copy-Item cfg.example.json cfg.json
+```
+
+Отредактируйте полученный файл, добавьте туда ключ с сайта openai.
+```json
+{"openai": "OPEN AI KEY"}
+```
 
 ### Для запуска
 

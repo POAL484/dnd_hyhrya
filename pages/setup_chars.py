@@ -107,7 +107,7 @@ def setup_chars_page(page: ft.Page):
             e.control.value = e.control.value[:-1]
             e.control.update()
             return
-        page.dialog_1_fields["stats_errors"].controls[0].color = "#bb2121" if not check_every_value_more(17, map(get_value_for_map, page.dialog_1_fields["stats"].values())) else None
+        page.dialog_1_fields["stats_errors"].controls[0].color = "#bb2121" if not check_every_value_more(18, map(get_value_for_map, page.dialog_1_fields["stats"].values())) else None
         page.dialog_1_fields["stats_errors"].controls[1].color = "#bb2121" if sum(map(get_value_for_map, page.dialog_1_fields["stats"].values())) > 70 else None
         page.dialog_1_fields["stats_errors"].controls[1].value = f"Сумма статистик не должна быть больше 70. Текущая сумма: {sum(map(get_value_for_map, page.dialog_1_fields["stats"].values()))}"
         page.update()
@@ -158,7 +158,7 @@ def setup_chars_page(page: ft.Page):
             "class": ft.Dropdown(class_key, u.generateDropdownOptionsKeysEqualValues(basic_stuff.classes_data.keys()), label="Класс", on_change=update_info_class),
             "class_info": ft.Column(get_info_about_class(class_key), spacing=2),
             "stats": stats,
-            "stats_errors": ft.Row([ ft.Text("Каждая статистика не должна быть больше 17", color="#bb2121" if not check_every_value_more(17, base_stats.values()) else None), ft.Text(f"Сумма статистик не должна быть больше 70. Текущая сумма: {sum(base_stats.values())}", color="#bb2121" if sum(base_stats.values()) > 70 else None) ]),
+            "stats_errors": ft.Row([ ft.Text("Каждая статистика не должна быть больше 18", color="#bb2121" if not check_every_value_more(18, base_stats.values()) else None), ft.Text(f"Сумма статистик не должна быть больше 70. Текущая сумма: {sum(base_stats.values())}", color="#bb2121" if sum(base_stats.values()) > 70 else None) ]),
             "background": ft.TextField(background, label="Предыстория (необязательно)", multiline=True),
             "pers_goal": ft.TextField(pers_goal, label="Личная цель (необязательно)", multiline=True)
         }
@@ -222,7 +222,7 @@ def setup_chars_page(page: ft.Page):
         if page.dialog_1_fields['race'].value == "ns": fields += ['расы']
         if page.dialog_1_fields['class'].value == "ns": fields += ['класса']
         if -1 in page.kit_info: fields += ['не выбрано все снаряжение']
-        if not check_every_value_more(17, map(get_value_for_map, page.dialog_1_fields["stats"].values())) or sum(map(get_value_for_map, page.dialog_1_fields["stats"].values())) > 70: fields += ["ошибки при заполнении характеристик"]
+        if not check_every_value_more(18, map(get_value_for_map, page.dialog_1_fields["stats"].values())) or sum(map(get_value_for_map, page.dialog_1_fields["stats"].values())) > 70: fields += ["ошибки при заполнении характеристик"]
         if fields:
             page.open(ft.AlertDialog(content=ft.Container(ft.Text(f"Персонаж не имеет: {', '.join(fields)}. Проверьте эти поля", size=u.calcFontByWidth(page.width/1.5, f"Персонаж не имеет: {', '.join(fields)}. Заполните эти поля"), text_align=ft.TextAlign.CENTER), width=page.width/1.4, height=70, alignment=ft.Alignment(0, 0)), modal=False, on_dismiss=lambda e: page.open(page.ddialog)))
             return
@@ -281,6 +281,6 @@ def setup_chars_page(page: ft.Page):
     page.n_char = 1
     page.ttitle = ft.Text(f"Игрок {page.n_char}, время создавать персонажа!", text_align=ft.TextAlign.CENTER, width=page.width, size=56)
     page.add(page.ttitle, ft.Row([
-        ft.ElevatedButton(content=ft.Column([ft.Icon(ft.icons.SMART_TOY, size=page.width/3), ft.Text("Создать персонажа нейросетью", size=23, text_align=ft.TextAlign.CENTER, width=page.width/3)], ft.MainAxisAlignment.CENTER), width=page.width/2.5, height=page.width/2.5, on_click=lambda _: ai_char()),
-        ft.ElevatedButton(content=ft.Column([ft.Icon(ft.icons.EDIT, size=page.width/3), ft.Text("Создание собственного персонажа", size=23, text_align=ft.TextAlign.CENTER, width=page.width/3)], ft.MainAxisAlignment.CENTER), width=page.width/2.5, height=page.width/2.5, on_click=lambda _: page.open(gen_dialog()))
+        ft.Column([ft.ElevatedButton(content=ft.Column([ft.Icon(ft.icons.SMART_TOY, size=page.width/3.5), ], ft.MainAxisAlignment.CENTER), width=page.width/3.5, height=page.width/3.5, on_click=lambda _: ai_char()), ft.Text("Создать персонажа нейросетью", size=23, text_align=ft.TextAlign.CENTER, width=page.width/3.5)], ft.MainAxisAlignment.CENTER),
+        ft.Column([ft.ElevatedButton(content=ft.Column([ft.Icon(ft.icons.EDIT, size=page.width/3.5), ], ft.MainAxisAlignment.CENTER), width=page.width/3.5, height=page.width/3.5, on_click=lambda _: page.open(gen_dialog())), ft.Text("Создание собственного персонажа", size=23, text_align=ft.TextAlign.CENTER, width=page.width/3.5)], ft.MainAxisAlignment.CENTER)
     ], ft.MainAxisAlignment.SPACE_AROUND))
